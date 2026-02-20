@@ -27,8 +27,10 @@ class Diagnosis:
     summary: str
     explanation: str
     fix_command: str | None
-    confidence: str   # "high" | "medium"
-    source: str       # "rule"  | "ai"
+    confidence: str        # "high" | "medium"
+    source: str            # "rule" | "ai" | "dry-run"
+    tokens: int | None = None
+    cost_usd: float | None = None
 
 
 # ── Internal helpers ─────────────────────────────────────────────────────────────

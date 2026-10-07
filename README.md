@@ -43,20 +43,11 @@ is useless for the class of errors that *is* the network.
 
 ## How a failure is diagnosed
 
-```mermaid
-flowchart TD
-    C["wtf &lt;your command&gt;"] --> R{"exit code"}
-    R -- "0" --> OK(["passes through, costs nothing"])
-    R -- "non-zero" --> CTX["collect context<br/>versions · installed packages<br/>requirements · venv state"]
-    CTX --> RULES{"matches a known rule?"}
-    RULES -- "yes" --> FIX(["diagnosis + fix command"])
-    RULES -- "no" --> MODE{"inference mode"}
-    MODE -- "--no-ai" --> NONE(["rule output only"])
-    MODE -- "--local" --> OLL["Ollama<br/>nothing leaves the machine"]
-    MODE -- "default" --> API["hosted model<br/>minimal payload"]
-    OLL --> FIX
-    API --> FIX
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/flow-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/flow-light.png">
+  <img src="assets/flow-light.png" alt="A failing command collects local context, then resolves via rule match, local Ollama, or a hosted model">
+</picture>
 
 It engages **only on failure**, so it costs nothing when things work.
 
